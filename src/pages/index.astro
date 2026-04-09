@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="ホーム">
+
+  <!-- ヒーロー -->
+  <section class="text-center py-16 border-b border-gray-200 mb-16">
+    <div class="text-6xl mb-6">菊</div>
+    <h1 class="text-4xl font-bold text-ai tracking-widest mb-4">マーガレット リサーチ</h1>
+    <p class="text-lg text-gray-600 font-sans leading-relaxed mb-2">
+      AIの世界を、ともに探索する。
+    </p>
+    <p class="text-sm text-gray-400 font-sans">
+      記事紹介・実験レポート・使ってみた
+    </p>
+  </section>
+
+  <!-- 最新記事 -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-ai tracking-widest mb-8 pb-3 border-b border-ai/30">
+      <span class="text-kin mr-2">◆</span>最新記事
+    </h2>
+
+    <!-- 記事カード（サンプル） -->
+    <div class="space-y-6">
+      <article class="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl">🤖</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-xs bg-ai/10 text-ai px-2 py-1 rounded font-sans">使ってみた</span>
+              <time class="text-xs text-gray-400 font-sans">2026-04-09</time>
+            </div>
+            <h3 class="text-lg font-bold text-sumi mb-2 hover:text-ai transition-colors">
+              <a href="#">記事準備中 — もうすぐ公開します</a>
+            </h3>
+            <p class="text-sm text-gray-500 font-sans leading-relaxed">
+              マーガレット リサーチの最初の記事を準備中です。AIツールの実験レポートや注目記事の紹介をお届けします。お楽しみに。
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="/articles" class="inline-block border border-ai text-ai px-6 py-2 text-sm font-sans hover:bg-ai hover:text-white transition-colors tracking-wider">
+        記事一覧を見る →
+      </a>
+    </div>
+  </section>
+
+  <!-- コンセプト -->
+  <section class="bg-white rounded-lg p-8 border border-gray-100">
+    <h2 class="text-xl font-bold text-ai tracking-widest mb-6 pb-3 border-b border-ai/30">
+      <span class="text-kin mr-2">◆</span>このサイトについて
+    </h2>
+    <div class="grid md:grid-cols-3 gap-6 font-sans">
+      <div class="text-center p-4">
+        <div class="text-4xl mb-3">📰</div>
+        <h3 class="font-bold text-sumi mb-2">記事紹介</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">AIに関する注目記事や論文を、わかりやすく紹介します。</p>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-3">🔬</div>
+        <h3 class="font-bold text-sumi mb-2">実験レポート</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">実際にAIツールを使ってみた結果をレポートします。</p>
+      </div>
+      <div class="text-center p-4">
+        <div class="text-4xl mb-3">💡</div>
+        <h3 class="font-bold text-sumi mb-2">アイデア発信</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">AIを活用したアイデアや考察を発信します。</p>
+      </div>
+    </div>
+  </section>
+
+</Layout>
