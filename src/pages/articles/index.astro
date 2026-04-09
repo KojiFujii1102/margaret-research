@@ -1,0 +1,105 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allArticles = await getCollection('articles');
+const sorted = allArticles.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const categoryLabel: Record<string, string> = {
+  article: '記事紹介',
+  tried: '使ってみた',
+  experiment: '実験レポート',
+  idea: 'アイデア',
+};
+
+const categoryColor: Record<string, string> = {
+  article: 'bg-ai/10 text-ai',
+  tried: 'bg-asagi/10 text-asagi',
+  experiment: 'bg-beni/10 text-beni',
+  idea: 'bg-kin/10 text-kin',
+};
+
+const categoryIcon: Record<string, string> = {
+  article: '📰',
+  tried: '🔬',
+  experiment: '⚗️',
+  idea: '💡',
+};
+---
+
+<Layout title="記事一覧" description="マーガレット リサーチの記事一覧 - AI関連の記事紹介と実験レポート">
+
+  <div class="mb-12">
+    <h1 class="text-3xl font-bold text-ai tracking-widest mb-3">
+      <span class="text-kin mr-2">◆</span>記事一覧
+    </h1>
+    <p class="text-sm text-gray-500 font-sans">AIの世界の探索レポート</p>
+  </div>
+
+  <!-- カテゴリフィルター（表示のみ） -->
+  <div class="flex gap-3 mb-10 flex-wrap font-sans">
+    <span class="px-4 py-1.5 text-sm bg-ai text-white rounded-full">すべて</span>
+    <span class="px-4 py-1.5 text-sm border border-gray-300 text-gray-600 rounded-full">記事紹介</span>
+    <span class="px-4 py-1.5 text-sm border border-gray-300 text-gray-600 rounded-full">使ってみた</span>
+    <span class="px-4 py-1.5 text-sm border border-gray-300 text-gray-600 rounded-full">実験レポート</span>
+    <span class="px-4 py-1.5 text-sm border border-gray-300 text-gray-600 rounded-full">アイデア</span>
+  </div>
+
+  <!-- 記事リスト -->
+  {sorted.length > 0 ? (
+    <div class="space-y-6">
+      {sorted.map((article) => {
+        const formattedDate = article.data.date.toLocaleDateString('ja-JP', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        return (
+          <a
+            href={`/articles/${article.id.replace(/\.md$/, '')}`}
+            class="block bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-ai/30 transition-all"
+          >
+            <article class="flex items-start gap-4">
+              <div class="text-3xl flex-shrink-0">
+                {categoryIcon[article.data.category]}
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3 mb-2 flex-wrap">
+                  <span class={`text-xs px-2.5 py-1 rounded font-sans ${categoryColor[article.data.category]}`}>
+                    {categoryLabel[article.data.category]}
+                  </span>
+                  <time class="text-xs text-gray-400 font-sans" datetime={article.data.date.toISOString()}>
+                    {formattedDate}
+                  </time>
+                </div>
+                <h2 class="text-lg font-bold text-sumi mb-2 leading-snug hover:text-ai transition-colors">
+                  {article.data.title}
+                </h2>
+                <p class="text-sm text-gray-500 font-sans leading-relaxed">
+                  {article.data.description}
+                </p>
+                {article.data.tags && article.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    {article.data.tags.map((tag) => (
+                      <span class="text-xs text-gray-400 font-sans border border-gray-200 px-2 py-0.5 rounded-sm">
+                        # {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          </a>
+        );
+      })}
+    </div>
+  ) : (
+    <div class="text-center py-20">
+      <div class="text-5xl mb-4">🌸</div>
+      <p class="text-gray-500 font-sans text-sm">記事を準備中です。もうしばらくお待ちください。</p>
+    </div>
+  )}
+
+</Layout>
